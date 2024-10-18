@@ -1,6 +1,7 @@
 import os
 from moviepy.editor import VideoFileClip
-from converter import convert_video  # Assuming you have this function for video conversion
+# from converter import convert_video  # Assuming this is your custom video conversion function
+
 
 input_video_path = "C:\\Users\\Gowrish\\Desktop\\My\\PyFiles\\YTMaker\\input.mp4"
 output_dir = "C:\\Users\\Gowrish\\Desktop\\My\\PyFiles\\YTMaker"
@@ -8,11 +9,24 @@ output_dir = "C:\\Users\\Gowrish\\Desktop\\My\\PyFiles\\YTMaker"
 # Check if the input file is an MP4 file
 input_filename, input_file_extension = os.path.splitext(os.path.basename(input_video_path))
 
-if input_file_extension.lower() != '.mp4':
-    # Convert the file to MP4 using the convert_video function
-    output_video_path = convert_video(input_video_path, output_dir)
-    # Use the converted video as the input for further processing
-    input_video_path = output_video_path
+
+
+# if input_file_extension.lower() == '.mkv':
+#     # Convert the file to MP4 using the convert_video function
+#     output_video_path = convert_video(input_video_path, output_dir)
+
+#     # Debugging: Check if output_video_path is None
+#     print(f"Output file path: {output_video_path}")
+
+#     if output_video_path is None:
+#         raise ValueError("The convert_video function did not return a valid output path.")
+    
+#     # Use the converted video as the input for further processing
+#     input_video_path = output_video_path
+
+# Ensure input_video_path is valid before proceeding
+if not os.path.exists(input_video_path):
+    raise FileNotFoundError(f"The video file at {input_video_path} was not found.")
 
 def convert_landscape_to_portrait(input_video_path, output_video_path):
     # Load the video
